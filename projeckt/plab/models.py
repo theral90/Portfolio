@@ -10,12 +10,11 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
 
-@receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
-def save_profile(sender, instance, created, **kwargs):
-    user = instance
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
     if created:
-        profile = UserProfile(user=user)
-        profile.sav
+        Profile.objects.create(user=instance)
+    instance.profile.save()
 
 
 TARGETS = (

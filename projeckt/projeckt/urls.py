@@ -18,7 +18,8 @@ from django.urls import path
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from plab.views import ProfileList, ProfileCreate, ProfileView, ProfileUpdate, ProfileDelete, HomePageView, RegisterPageView, FormPageView, registration
+from plab.views import ProfileList, ProfileCreate, ProfileView, ProfileUpdate, \
+ProfileDelete, HomePageView, RegisterPageView, FormPageView, registration, SignUp
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -39,5 +40,7 @@ urlpatterns = [
     url(r'^password_reset/done/$', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',auth_views.PasswordResetConfirmView.as_view(template_name="registration/password_reset_confirm.html"), name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_complete.html"), name='password_reset_complete'),
+    path('signup/', SignUp.as_view(), name='signup'),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

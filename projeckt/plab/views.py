@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.views import View
+from django.views import View, generic
 from plab.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from .forms import SignUpForm
@@ -35,19 +35,10 @@ def registration(request):
         return render(request, 'register.html', {'form': form})
 
 
-"""class LoginView(FormView):
-    template_name = 'login.html'
-    form_class = AuthenticationForm
-
-    def form_valid(self, form):
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-        user = authenticate(username=username, password=password)
-        login(self.request, user)
-        return super().form_valid(form)
-    def get_success_url(self):
-        return reverse_lazy('index')"""
-
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
 
 class HomePageView(View):
     def get(self, request):
