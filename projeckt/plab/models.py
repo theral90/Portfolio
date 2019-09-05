@@ -1,24 +1,24 @@
+from __future__ import unicode_literals
 from django.db import models
-from django.contrib.auth.models import User
-from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import User
+from django.conf import settings
 
-"""
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
 
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
+@receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
+def save_profile(sender, instance, created, **kwargs):
+    user = instance
     if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
-"""
+        profile = UserProfile(user=user)
+        profile.sav
 
-CELE = (
+
+TARGETS = (
     (1, "samotne_matki"),
     (2, "niepełnosprawni"),
     (3, "dzieci"),
@@ -28,7 +28,7 @@ CELE = (
     (7, "wszyscy"),
 )
 
-DAROWIZNY = (
+DONATIONS = (
     (1, "zabawki"),
     (2, "książki"),
     (3, "ubrania, które nadają się do ponownego użycia"),
@@ -40,28 +40,28 @@ DAROWIZNY = (
 class Institutions(models.Model):
     name = models.CharField(max_length=256)
     city = models.CharField(max_length=128)
-    target = models.IntegerField(choices=CELE)
+    target = models.IntegerField(choices=TARGETS)
     address = models.CharField(max_length=256)
 
 
-class UserDonations(models.Model):
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    nr_donations = models.IntegerField()
-    nr_bags = models.IntegerField()
-    nr_institutions = models.IntegerField()
-
-
 class Donations(models.Model):
-    uzytkownik = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    darowizna_type = models.IntegerField(choices=DAROWIZNY)
-    worki = models.IntegerField()
-    odbiorca_type = models.IntegerField(choices=CELE)
-    instytucja = models.ForeignKey(Institutions, on_delete=models.CASCADE)
-    miasto = models.CharField(max_length=128)
-    darowizna_date = models.DateTimeField(auto_now_add=True)
-    adres_odbioru = models.CharField(max_length=256)
-    tel = models.CharField(max_length=32)
-    data = models.DateField()
-    godzina = models.DateTimeField()
-    notatka = models.TextField()
-    status = models.BooleanField(default=False)
+    user =  models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    donation_type = models.IntegerField(choices=DONATIONS)
+    number_of_bags = models.IntegerField(default=0)
+    recipient_type = models.IntegerField(choices=TARGETS)
+    institution = models.ForeignKey(Institutions, on_delete=models.CASCADE)
+    city = models.CharField(max_length=128)
+    donation_date = models.DateTimeField(auto_now_add=True)
+    pickup_address = models.CharField(max_length=256)
+    phone = models.CharField(max_length=128)
+    pickup_date = models.DateTimeField()
+    transport_notes = models.TextField()
+    transfer_status = models.BooleanField(default=False)
+
+
+"""
+class Profile1(models.Model):
+    user1 = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio1 = models.TextField(max_length=500, blank=True)
+    location1 = models.CharField(max_length=30, blank=True)
+"""

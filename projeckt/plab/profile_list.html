@@ -1,0 +1,28 @@
+<h1>Proflie</h1>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>User</th>
+    <th>Bio</th>
+    <th>Location</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for profile in object_list %}
+    <tr>
+    <td>{{ profile.user }}</td>
+    <td>{{ profile.bio }}</td>
+    <td>{{ profile.location }}</td>
+    <td><a href="{% url "profile_view" profile.id %}">view</a></td>
+    <td><a href="{% url "proflie_edit" profile.id %}">edit</a></td>
+    <td><a href="{% url "profile_delete" profile.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url "profile_new" %}">New</a>
