@@ -125,11 +125,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'plab_app'
-EMAIL_HOST_PASSWORD = 'mys3cr3tp4ssw0rd'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Ral90 <noreply@example.com>'
