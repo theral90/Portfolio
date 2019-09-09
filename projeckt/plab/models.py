@@ -38,7 +38,7 @@ DONATIONS = (
 
 class Institutions(models.Model):
     name = models.CharField(max_length=256)
-    city = models.CharField(max_length=128)
+    city = models.CharField(max_length=64)
     target = models.IntegerField(choices=TARGETS)
     address = models.CharField(max_length=256)
 

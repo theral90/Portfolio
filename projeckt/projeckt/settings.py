@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^#j$r@r=z-!hv=@e7rip2i3c+wjd^h=im8n^v37p)0n&irn#)w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -78,14 +78,15 @@ WSGI_APPLICATION = 'projeckt.wsgi.application'
 DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
-        'NAME': 'portfolio',
+        'NAME': 'production_db',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'postgres',
-        'PASSWORD': 'portfolio',
+        'USER': 'user',
+        'PASSWORD': 'password',
 
     }
 }
 
+from .local_settings import *
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
