@@ -19,7 +19,9 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
 from plab.views import ProfileList, ProfileCreate, ProfileView, ProfileUpdate, \
-ProfileDelete, HomePageView, RegisterPageView, FormPageView, registration, SignUp
+ProfileDelete, HomePageView, RegisterPageView, FormPageView, registration, SignUp, \
+ShowTrustedInstitutionsView, AddInstitutionsView, DeleteInstitutionsView, \
+InstitutionsUpdate, InstitutionsList#, DonationsList, AddDonationsView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -41,6 +43,12 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',auth_views.PasswordResetConfirmView.as_view(template_name="registration/password_reset_confirm.html"), name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_complete.html"), name='password_reset_complete'),
     path('signup/', SignUp.as_view(), name='signup'),
-
+    url(r'institution/(?P<id>\d+)/$', ShowTrustedInstitutionsView.as_view(), name='institution'),
+    url(r'add_institution/$', AddInstitutionsView.as_view(), name='add_institution'),
+    url(r'^institution/delete/(?P<pk>\d+)/$', DeleteInstitutionsView.as_view(), name='delete_institution'),
+    path('institution/edit/<int:pk>', InstitutionsUpdate.as_view(), name='institution_edit'),
+    path('institution/list', InstitutionsList.as_view(), name='institution_list'),
+    #path('donations/list', DonationsList.as_view(), name='donations_list'),
+    #url(r'add_donation/$', AddDonationsView.as_view(), name='add_donation'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

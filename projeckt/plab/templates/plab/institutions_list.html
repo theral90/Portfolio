@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Lista instytucji</h2>
+
+{% for institution in object_list %}
+<p>Nazwa: <strong>{{ institution.name }}</strong><br>
+Miasto: {{ institution.city  }}<br>
+Cel: {{ institution.target }}<br>
+Adres: {{ institution.address }}<br></p>
+{% endfor %}
+
+<a href="/add_institution">Dodaj instytucje</a>
+{% endblock %}

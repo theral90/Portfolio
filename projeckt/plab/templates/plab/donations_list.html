@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Lista darowizn</h2>
+
+{% for donations in object_list %}
+<p>Nazwa: <strong>{{ donation.name }}</strong><br>
+Użytkownik: {{ donation.user }}<br>
+Typ darowizny: {{ donation.donation_type }}<br>
+Ilość worków: {{ donation.number_of_bags }}<br>
+Odbiorca: {{ donation.recipient_type }}<br>
+Instytucja: {{ donation.institution }}<br>
+Miasto: {{ donation.city }}<br>
+Data darowizny: {{ donation.donation_date }}<br>
+Adres odbioru: {{ donation.pickup_address }}<br>
+Telefon: {{ donation.phone }}<br>
+Data odbioru: {{ donation.pickup_date }}<br>
+Uwagi: {{ donation.transport_notes }}<br>
+Status: {{ donation.transfer_status }}<br></p>
+{% endfor %}
+
+<a href="/add_donation">Dodaj darowizne</a>
+{% endblock %}
