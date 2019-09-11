@@ -1,27 +1,84 @@
 {% load static %}
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pl">
   <head>
-    <meta charset="utf-8">
-    <title>{% block title %}PLAB{% endblock %}</title>
-    Witaj, {{ user.get_full_name }} <small>{{ user.username }}</small>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href= "{% static '/css/style.css' %}" />
   </head>
-  <body>
-    <header>
-      {% if user.is_authenticated %}
-      <ul>
-        <li><a href="{% url 'logout' %}"><button type="submit">Logout</button></a></li></ul>
-      {% else %}
-      <ul>
-        <li><a href="{% url 'login' %}"><button type="submit">Login</button></a></li> /
-        <li><a href="{% url 'signup' %}"><button type="submit">SignUp</button></a></li>
-      </ul>
-      {% endif %}
+  {% if request.user.is_authenticated %}
+  <header class="header--form-page">
+      <nav class="container container--70">
+        <ul class="nav--actions">
+          <li class="logged-user">
+            {% if request.user.first_name %}
+            Witaj {{user.first_name}}
+            {% else %}
+            Witaj {{user.email}}
+            {% endif %}
+            <ul class="dropdown">
+              <li><a href={% url 'profile_view' user.pk %}>Profil</a></li>
+              <li><a href={% url 'profile_edit' user.pk %}>Ustawienia</a></li>
+              <li><a href={% url 'donations_list' %}>Moje dary</a></li>
+              <li><a href={% url 'logout' %}>Wyloguj</a></li>
+            </ul>
+          </li>
+        </ul>
+  {% else %}
+  <header class="header--main-page">
+      <nav class="container container--70">
+          <ul class="nav--actions">
+            <li><a href={% url 'login' %} class="btn btn--small btn--without-border">Zaloguj</a></li>
+            <li><a href={% url 'signup' %} class="btn btn--small btn--highlighted">Załóż konto</a></li>
+          </ul>
+  {% endif %}
+          <ul>
+            <li><a href={% url 'index' %} class="btn btn--without-border active">Start</a></li>
+            <li><a href={% url 'how_it' %} class="btn btn--without-border">O co chodzi?</a></li>
+            {% if request.user.is_superuser %}
+            <li><a href={% url 'profile_list' %} class="btn btn--without-border">Administratorzy</a></li>
+            {% endif %}
+            <li><a href={% url 'about' %} class="btn btn--without-border">O nas</a></li>
+            {% if request.user.is_superuser %}
+            <li><a href={% url 'institution_list' %} class="btn btn--without-border">Fundacje i organizacje</a></li>
+            {% else %}
+            <li><a href={% url 'user_institutions' %} class="btn btn--without-border">Fundacje i organizacje</a></li>
+            {% endif %}
+            <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
+          </ul>
+          {% block content %} {% endblock %}
+        </nav>
     </header>
-    <main>
-      <link rel="stylesheet" type="text/css"
-            href="{% static 'css/main.css' %}">
-      {% block content %}
-      {% endblock %}
-    </main>
-  </body>
+​
+    <footer>
+        <div class="contact" id='contact'>
+          <h2>Skontaktuj się z nami</h2>
+          <h3>Formularz kontaktowy</h3>
+          <form method="POST" action={% url 'contact' %}>
+            {% csrf_token %}
+            <div class="form-group form-group--50">
+              <input type="text" name="name" placeholder="Imię" />
+            </div>
+            <div class="form-group form-group--50">
+              <input type="text" name="surname" placeholder="Nazwisko" />
+            </div>
+            <div class="form-group">
+              <textarea name="message" placeholder="Wiadomość" rows="1"></textarea>
+            </div>
+            <button class="btn" type="submit">Wyślij</button>
+          </form>
+        </div>
+        <div class="bottom-line">
+          <span class="bottom-line--copy">Copyright &copy; 2018</span>
+          <div class="bottom-line--icons">
+              <a href="#" class="btn btn--small"><img src={% static "images/icon-facebook.svg" %}/></a>
+              <a href="#" class="btn btn--small"><img src={% static "images/icon-instagram.svg" %}/></a>
+            </div>
+        </div>
+      </footer>
+​
+    <script src={% static "js/app.js" %}></script>
 </html>

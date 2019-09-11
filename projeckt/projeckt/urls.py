@@ -18,11 +18,13 @@ from django.urls import path
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from plab.views import ProfileList, ProfileCreate, ProfileView, ProfileUpdate, \
 ProfileDelete, HomePageView, RegisterPageView, FormPageView, registration, SignUp, \
 ShowTrustedInstitutionsView, AddInstitutionsView, DeleteInstitutionsView, \
-InstitutionsUpdate, InstitutionsList#, DonationsList, AddDonationsView
-from django.contrib.auth import views as auth_views
+InstitutionsUpdate, InstitutionsList, DonationsList, AddDonationsView, HowItView, \
+AboutView, ContactView, ShowDonationsView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -48,7 +50,12 @@ urlpatterns = [
     url(r'^institution/delete/(?P<pk>\d+)/$', DeleteInstitutionsView.as_view(), name='delete_institution'),
     path('institution/edit/<int:pk>', InstitutionsUpdate.as_view(), name='institution_edit'),
     path('institution/list', InstitutionsList.as_view(), name='institution_list'),
-    #path('donations/list', DonationsList.as_view(), name='donations_list'),
-    #url(r'add_donation/$', AddDonationsView.as_view(), name='add_donation'),
+    path('donations/list', DonationsList.as_view(), name='donations_list'),
+    url(r'donations/(?P<id>\d+)/$', ShowDonationsView.as_view(), name='donations'),
+    url(r'add_donation/$', AddDonationsView.as_view(), name='add_donation'),
+    url(r'^how/$', HowItView.as_view(), name='how_it'),
+    url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'^contact/$', ContactView.as_view(), name='contact'),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

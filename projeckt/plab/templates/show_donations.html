@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Darowizna:</h1>
+<body>
+<ul>
+    <p>
+    Użytkownik: {{ donations.user }}<br>
+    Typ darowizny: {{ donations.donations_type }}<br>
+    Ilość worków: {{ donations.number_of_bags }}<br>
+    Odbiorca: {{ donations.recipient_type }}<br>
+    Instytucja: {{ donations.institution }}<br>
+    Miasto: {{ donations.city }}<br>
+    Data darowizny: {{ donations.donations_date }}<br>
+    Adres odbioru: {{ donations.pickup_address }}<br>
+    Telefon: {{ donations.phone }}<br>
+    Data odbioru: {{ donations.pickup_date }}<br>
+    Uwagi: {{ donations.transport_notes }}<br>
+    Status: {{ donations.transfer_status }}<br>
+    </p>
+
+</ul>
+</<body>
+
+{% endblock %}

@@ -243,9 +243,9 @@ document.addEventListener("DOMContentLoaded", function() {
      * TODO: validation, send data to server
      */
     submit(e) {
-      e.preventDefault();
+//      e.preventDefault();
       this.currentStep++;
-      this.updateForm();
+//      this.updateForm();
     }
   }
   const form = document.querySelector(".form--steps");

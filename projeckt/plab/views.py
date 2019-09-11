@@ -132,7 +132,7 @@ class InstitutionsUpdate(UpdateView):
 class InstitutionsList(ListView):
     model = Institutions
 
-"""
+
 class DonationsList(ListView):
     model = Donations
 
@@ -177,4 +177,27 @@ class AddDonationsView(View):
 
         ctx = {"form": form}
         return render(request, "add_donation.html", ctx)
-"""
+
+
+class ShowDonationsView(View):
+
+    def get(self, request, id):
+        get_donations = get_object_or_404(Donations, pk=id)
+        ctx = {"donations": get_donations}
+        return render(request, "show_donations.html", ctx)
+
+
+
+class HowItView(View):
+    def get(self, request):
+        return render(request, "howit.html")
+
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, "about.html")
+
+
+class ContactView(View):
+    def get(self, request):
+        return render(request, "contact.html")

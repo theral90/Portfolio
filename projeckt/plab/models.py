@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.conf import settings
+import datetime
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -50,17 +52,15 @@ class Donations(models.Model):
     recipient_type = models.IntegerField(choices=TARGETS)
     institution = models.ForeignKey(Institutions, on_delete=models.CASCADE)
     city = models.CharField(max_length=128)
-    donation_date = models.DateTimeField(auto_now_add=True)
+    donation_date = models.DateTimeField(default=datetime.datetime.now)
     pickup_address = models.CharField(max_length=256)
     phone = models.CharField(max_length=128)
-    pickup_date = models.DateTimeField()
+    pickup_date = models.DateField(null=True, blank=True)
     transport_notes = models.TextField()
     transfer_status = models.BooleanField(default=False)
 
 
-"""
 class Profile1(models.Model):
     user1 = models.OneToOneField(User, on_delete=models.CASCADE)
     bio1 = models.TextField(max_length=500, blank=True)
     location1 = models.CharField(max_length=30, blank=True)
-"""
