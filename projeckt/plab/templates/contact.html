@@ -1,1 +1,19 @@
 {% extends "base.html" %}
+{% block content %}
+<h1>Kontakt</h1>
+ <body>
+     <div class="slogan container container--70">
+       <div class="slogan--item">
+
+    <form method="post" action="">
+       {% csrf_token %}
+       <li>imie:<input type="text" name="name"</li><br/>
+       <li>nazwisko:<input type="text" name="surname"></li>
+       <li>wiadomość:<input type="text" name="message"></li>
+       <input type="submit" value="wyslij">
+   </form>
+
+       </div>
+     </div>
+</body>
+{% endblock %}

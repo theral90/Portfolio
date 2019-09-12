@@ -17,23 +17,19 @@
             Witaj, {{ user.get_full_name }} <small>{{ user.username }}</small>
             <ul class="dropdown">
               <li><a href="{% url 'profile_list' %}">Profil</a></li>
-              <li><a href="#">Ustawienia</a></li>
-              <li><a href="#">Moje zbiórki</a></li>
+              <li><a href="{% url 'profile_edit' user.pk %}">Ustawienia</a></li>
+              <li><a href="{% url 'donations_list' %}">Moje zbiórki</a></li>
               <li><a href="{% url 'logout' %}">Wyloguj</a></li>
             </ul>
           </li>
         </ul>
 
         <ul>
-          <li><a href="#" class="btn btn--without-border active">Start</a></li>
+          <li><a href="{% url 'index' %}" class="btn btn--without-border active">Start</a></li>
           <li><a href="{% url 'how_it' %}" class="btn btn--without-border">O co chodzi?</a></li>
-          <li><a href="#" class="btn btn--without-border">O nas</a></li>
-          <li>
-            <a href="#" class="btn btn--without-border"
-              >Fundacje i organizacje</a
-            >
-          </li>
-          <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
+          <li><a href="{% url 'about' %}" class="btn btn--without-border">O nas</a></li>
+          <li><a href="{% url 'institution_list' %}" class="btn btn--without-border">Fundacje i organizacje</a></li>
+          <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
       </nav>
 
@@ -396,11 +392,12 @@
     </section>
 
     <footer>
-      <div class="contact">
-        <h2>Skontaktuj się z nami</h2>
-        <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
-          <div class="form-group form-group--50">
+        <div class="contact" id='contact'>
+          <h2>Skontaktuj się z nami</h2>
+          <h3>Formularz kontaktowy</h3>
+          <form method="POST" action={% url 'contact' %}>
+            {% csrf_token %}
+            <div class="form-group form-group--50">
             <input type="text" name="name" placeholder="Imię" />
           </div>
           <div class="form-group form-group--50">

@@ -17,7 +17,6 @@ class AddInstitutionsForm(ModelForm):
             fields = "__all__"
 
 
-
 class AddDonationsForm(ModelForm):
 
     class Meta:

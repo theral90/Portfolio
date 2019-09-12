@@ -187,7 +187,6 @@ class ShowDonationsView(View):
         return render(request, "show_donations.html", ctx)
 
 
-
 class HowItView(View):
     def get(self, request):
         return render(request, "howit.html")
@@ -201,3 +200,12 @@ class AboutView(View):
 class ContactView(View):
     def get(self, request):
         return render(request, "contact.html")
+
+    def post(self, request):
+        name = request.POST.get("name")
+        surname = request.POST.get("surname")
+        message = request.POST.get("message")
+        napis = "Witaj {} {}".format(name, surname, message)
+
+        ctx = {"napis": napis}
+        return render(request, "contact.html", ctx)

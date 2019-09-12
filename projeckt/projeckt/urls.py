@@ -36,7 +36,6 @@ urlpatterns = [
     path('home', HomePageView.as_view(), name='index'),
     url(r'^register/$', RegisterPageView.as_view(), name='register'),
     url(r'^form/$', FormPageView.as_view(), name='form'),
-    url(r'^registration1/$', registration, name='register'),
     url(r'^login/$',auth_views.LoginView.as_view(template_name="registration/login.html"), name="login"),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name="logout.html"), name='logout'),
     url(r'^registration/$', registration, name='registration'),
