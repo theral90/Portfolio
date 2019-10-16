@@ -21,7 +21,7 @@
             {% endif %}
             <ul class="dropdown">
               <li><a href={% url 'profile_view' user.pk %}>Profil</a></li>
-              <li><a href={% url 'profile_edit' user.pk %}>Ustawienia</a></li>
+              <li><a href={% url 'profile_edit' user.pk%}>Ustawienia</a></li>
               <li><a href={% url 'donations_list' %}>Moje dary</a></li>
               <li><a href={% url 'logout' %}>Wyloguj</a></li>
             </ul>
@@ -44,8 +44,6 @@
             <li><a href={% url 'about' %} class="btn btn--without-border">O nas</a></li>
             {% if request.user.is_superuser %}
             <li><a href={% url 'institution_list' %} class="btn btn--without-border">Fundacje i organizacje</a></li>
-            {% else %}
-            <li><a href={% url 'user_institutions' %} class="btn btn--without-border">Fundacje i organizacje</a></li>
             {% endif %}
             <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
           </ul>

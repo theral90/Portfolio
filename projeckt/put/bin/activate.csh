@@ -10,7 +10,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/home/rafal/Pulpit/Portfolio Lab/Portfolio/projeckt/put"
+setenv VIRTUAL_ENV "/home/rafal/Pulpit/Python/Portfolio Lab/Portfolio/projeckt/put"
 
 set _OLD_VIRTUAL_PATH="$PATH:q"
 setenv PATH "$VIRTUAL_ENV:q/bin:$PATH:q"

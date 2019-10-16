@@ -28,7 +28,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"/home/rafal/Pulpit/Portfolio Lab/Portfolio/projeckt/put"
+$VIRTUAL_ENV = r"/home/rafal/Pulpit/Python/Portfolio Lab/Portfolio/projeckt/put"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]
